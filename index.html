@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style id="s"></style>
+<title>Css Sync Editor</title>         
+<meta name="keywords" content="css, sync, localStorage" />        
+<meta name="description" content="This is a css playground allowing you to edit and sync css across tabs"/>    
+</head>
+<body>
+    <h1>Here you can try out css<br><small>it even syncs across multiple tabs</small></h1>
+<textarea rows="50" cols="250" id="css" oninput="update(this.value)"></textarea>
+<input type="button" onchange="save()" onclick="save()" value="save">
+<script>
+    window.addEventListener('storage', function(e) {
+        document.getElementById("css").value = e.storageArea.css;
+        update(e.storageArea.css);
+    })
+	const update = c => {
+    	document.getElementById("s").innerHTML = c;
+        save();
+    }
+    const save = () => {
+        localStorage.setItem("css", document.getElementById("css").value);
+    }
+    if(localStorage.getItem("css")){
+        document.getElementById("css").value = localStorage.getItem("css");
+        update(document.getElementById("css").value)
+    };
+</script>
+</body>
+</html>
