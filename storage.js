@@ -44,12 +44,12 @@ class storage{
 
         }
     }
-    loadURL(){
+    loadURL(url){
         this.loadData();
         this.backup()
         try{
             this.data.current.name = "temp"; 
-            let d = getUrlParam("data").split("|").map(v => atob(v));
+            let d = (url ? url : getUrlParam("data")).split("|").map(v => atob(v));
             this.data.current.html = d[0];
             this.data.current.js = d[1];
             this.data.current.css = d[2];
