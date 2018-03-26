@@ -4,9 +4,13 @@ class storage{
         this.storageLocker = s;
         this.data = {};
         this.current;
-        let d = localStorage.getItem("data");
-        if(d)this.init();
-        else this.loadCfg();
+        if(getUrlParam("js") && getUrlParam("html") && getUrlParam("css")){
+            this.loadURL()
+        }else{
+            let d = localStorage.getItem("data");
+            if(d)this.init();
+            else this.loadCfg();
+        }
     }
     async init(){
         let r = await fetch("https://api.myjson.com/bins/nn7nz");
@@ -14,12 +18,15 @@ class storage{
         this.data = j;
         return j;
     }
-    loadCfg(){
+    loadData(){
         ["current", "saved", "history", "settings"].forEach(v => {
             this.data[v] = JSON.parse(this.storageLocker.getItem(v));
         })
+    }
+    loadCfg(t = true){
+        t && this.loadData();
         if(!this.data.current.keyLength()){
-            this.data.current = this.data.history[0];
+            this.data.current = this.data.history[0] || {};
         }
         this.types.forEach(t => {
             byId(t).innerHTML = this.data.current[t]
@@ -37,10 +44,30 @@ class storage{
 
         }
     }
+    loadURL(){
+        this.loadData();
+        this.backup()
+        try{
+            this.data.current.name = "temp"; 
+            this.data.current.html = atob(getUrlParam("html"));
+            this.data.current.css = atob(getUrlParam("css"));
+            this.data.current.js = atob(getUrlParam("js"));
+        }catch(err){
+            console.log()
+            console.error(err.stack)
+            alert("Whoops Something Went Wrong. soz")
+        }
+        this.loadCfg(false);
+    }
     restoreFromCurrent(){
         
     }
     backup(){
-
+        if(this.data.history.map(v => v.id).indexOf(this.data.current.id) == -1){
+            this.data.history.push(this.data.current)
+        }else{
+            this.data.history[this.data.history.map(v => v.id).indexOf(this.data.current.id)] = this.data.current
+        }
+        this.save();
     }
 }

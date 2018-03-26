@@ -24,4 +24,5 @@ const save = () => {
         BowserStorage.data.current.name = name;
         BowserStorage.data.saved[name] = {id: generateId(), css: BowserStorage.data.current.css, html: BowserStorage.data.current.html, js: BowserStorage.data.current.js}
     }else alert("you must enter a name");
+    alert("Saved as " + name)
 }

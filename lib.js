@@ -1,4 +1,5 @@
 const byId = i => document.getElementById(i);
+const getUrlParam = key => new URLSearchParams(location.search).get(key);
 const generateId = (l = 8) => {
     return l.loop(() => randChar(100));
 }
