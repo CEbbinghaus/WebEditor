@@ -4,7 +4,7 @@ class storage{
         this.storageLocker = s;
         this.data = {};
         this.current;
-        if(getUrlParam("js") && getUrlParam("html") && getUrlParam("css")){
+        if(getUrlParam("data")){
             this.loadURL()
         }else{
             let d = localStorage.getItem("data");
@@ -49,9 +49,10 @@ class storage{
         this.backup()
         try{
             this.data.current.name = "temp"; 
-            this.data.current.html = atob(getUrlParam("html"));
-            this.data.current.css = atob(getUrlParam("css"));
-            this.data.current.js = atob(getUrlParam("js"));
+            let d = getUrlParam("data").split("|").map(v => atob(v));
+            this.data.current.html = d[0];
+            this.data.current.js = d[1];
+            this.data.current.css = d[2];
         }catch(err){
             console.log()
             console.error(err.stack)
