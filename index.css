@@ -1,0 +1,6 @@
+#static * :not(.exh){
+    visibility: visible;
+}
+.exh{
+    visibility: hidden
+}

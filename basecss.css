@@ -1,0 +1,156 @@
+body {
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    padding: 0;
+    background-color: #4d555f;
+    color: #ffffff;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    visibility: hidden;
+}
+
+textarea {
+    width: 100vw;
+    height: 100vh;
+    border: 0px;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    font-weight: 300;
+    color: #000000;
+}
+
+textarea:focus {
+    outline: 0;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 50px;
+}
+
+h1 small {
+    margin: 0px;
+    padding: 0px;
+    font-size: 40%
+}
+
+a {
+    text-decoration: none;
+    color: #20c6e8;
+}
+
+a:hover {
+    color: #287487;
+}
+
+input {
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    right: 0px;
+    height: 57px;
+    border: 0px;
+    font-size: 40px;
+    background: #00000000;
+    color: #ffffff;
+    border-radius: 20px 20px 0px 0px;
+}
+
+input:hover {
+    background: #aaaaaac0;
+    color: #303030;
+}
+
+nav {
+    height: 100%;
+}
+
+#selector {
+    /*background:#f40000;*/
+    width: 100vw;
+    height: 57px;
+    color: #1d1d1d;
+}
+
+ul {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*this is a test*/
+
+ul li {
+    height: 100%;
+    float: left;
+    display: inline;
+    padding: 0px;
+    cursor: pointer;
+    font-size: 40px;
+    border-radius: 15px 15px 0px 0px;
+}
+ul li span{
+    padding: 20px;
+}
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+}
+
+#tabs {
+    padding: 0px;
+}
+
+.red {
+    background: #fc3c3c;
+}
+
+.redh:hover {
+    background: #fc3c3c;
+}
+
+.green {
+    background: #33f754;
+}
+
+.greenh:hover {
+    background: #33f754;
+}
+
+.blue {
+    background: #36d7f7;
+}
+
+.blueh:hover {
+    background: #36d7f7;
+}
+
+.purple {
+    background: #c860c4;
+}
+
+.purpleh:hover {
+    background: #c860c4;
+}
+
+.cs.redh {
+    background: #fc3c3c;
+}
+
+.cs.greenh {
+    background: #33f754;
+}
+
+.cs.blueh {
+    background: #36d7f7;
+}
+
+.cs.purpleh {
+    background: #c860c4;
+}

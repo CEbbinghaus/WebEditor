@@ -1,31 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<style id="s"></style>
-<title>Css Sync Editor</title>         
-<meta name="keywords" content="css, sync, localStorage" />        
-<meta name="description" content="This is a css playground allowing you to edit and sync css across tabs"/>    
+    <link id="bcss" rel="stylesheet" href="basecss.css">
+<style id="css">body{
+    overflow-y: hidden;
+}</style>
+    <link rel="stylesheet" href="index.css">
+    <title>Web Editor</title>
+    <meta name="keywords" content="css, sync, localStorage" />
+    <meta name="description" content="This is a small Editor for testing idea's and messing around with css."/>
+    <link rel="stylesheet" href="./src/codeflask.css">
+    <link rel="stylesheet" href="./lib/prism.min.css">
+    <script src="./lib/prism.min.js"></script>
+    <script src="./src/codeflask.js"></script>
+    <style>
+    .code-column {
+        float:left;
+        padding:15px;
+    }
+    .code-column h2{
+        font-size:15px;
+        background:yellow;
+    }
+    .codeview {
+        width:200px;
+        height:200px;
+        border:1px solid #ccc;
+        background:#f5f5f5;
+        position:relative;
+    }
+    </style>
 </head>
+
 <body>
-    <h1>Here you can try out css<br><small>it even syncs across multiple tabs</small></h1>
-<textarea rows="50" cols="250" id="css" oninput="update(this.value)"></textarea>
-<input type="button" onchange="save()" onclick="save()" value="save">
-<script>
-    window.addEventListener('storage', function(e) {
-        document.getElementById("css").value = e.storageArea.css;
-        update(e.storageArea.css);
-    })
-	const update = c => {
-    	document.getElementById("s").innerHTML = c;
-        save();
-    }
-    const save = () => {
-        localStorage.setItem("css", document.getElementById("css").value);
-    }
-    if(localStorage.getItem("css")){
-        document.getElementById("css").value = localStorage.getItem("css");
-        update(document.getElementById("css").value)
-    };
-</script>
+    <div id="html">
+    <h1>This is a little Sandbox for Web Development. Original CSS can be found <a href="./basecss.css">here</a></h1>
+    </div>
+    <div id="static">
+        <div id="selector">
+            <input type="button" onclick="reset()" value="reset">
+            <nav>
+                <ul id="tabs">
+                    <li class="redh cs">
+                        <span id="CSS" onclick="changeEdit(this.id)">CSS</span>
+                    </li>
+                    <li class="greenh">
+                        <span id="HTML" onclick="changeEdit(this.id)">HTML</span>
+                    </li>
+                    <li class="blueh">
+                        <span id="JS" onclick="changeEdit(this.id)">JS</span>
+                    </li>
+                    <li class="exec exh purpleh ">
+                        <span id="Out"class="exec exh" onclick="changeEdit(this.id);run()">Run</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <textarea class="red" onchange="save()" rows="50" cols="250" id="edit" oninput="update(this.value)">
+        </textarea>
+        <script id="js" src="index.js">
+            const vector = function(x, y){
+                this.x = x;
+                this.y = y;
+                this.velx = Math.random() * 2 - 1
+                this.vely = Math.random() * 2 - 1
+            }
+            let vectorArray = [];
+            for(i = 0; i < 100; i++){
+                let v = new vector(Math.random() * innerWidth, Math.random() * innerHeight)
+                vectorArray.push(v);
+                console.log(v.x, v.y)
+            }
+        </script>
+    </div>
 </body>
+
 </html>
