@@ -11,18 +11,24 @@ body {
     visibility: hidden;
 }
 
-textarea {
+#editor {
     width: 100vw;
     height: 100vh;
-    border: 0px;
     padding: 0px;
+}
+
+#TxtA {
     font-size: 20px;
     font-weight: bold;
     font-weight: 300;
-    color: #000000;
+    border: 0px;
+    background: #00000000;
+    position: relative;
+    top: 0px;
+    padding: 20px;
 }
 
-textarea:focus {
+#TxtA:focus {
     outline: 0;
 }
 
@@ -47,9 +53,8 @@ a:hover {
     color: #287487;
 }
 
-input {
+.extra input {
     cursor: pointer;
-    position: absolute;
     float: right;
     right: 0px;
     height: 57px;
@@ -60,7 +65,7 @@ input {
     border-radius: 20px 20px 0px 0px;
 }
 
-input:hover {
+.extra input:hover {
     background: #aaaaaac0;
     color: #303030;
 }
@@ -82,20 +87,24 @@ ul {
     padding: 0px;
 }
 
-/*this is a test*/
-
-ul li {
+#tabs li{
     height: 100%;
     float: left;
-    display: inline;
     padding: 0px;
     cursor: pointer;
     font-size: 40px;
     border-radius: 15px 15px 0px 0px;
+    text-decoration-style: none;
+    list-style-type: none;
 }
-ul li span{
+#tabs li:not(#exec) {
+    display: inline;
+}
+
+ul li span {
     padding: 20px;
 }
+
 header {
     background: #35424a;
     color: #ffffff;
@@ -153,4 +162,51 @@ header {
 
 .cs.purpleh {
     background: #c860c4;
+}
+
+.cs:not(.exec) {
+    cursor: default;
+}
+
+#srnz {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background: #1e595ed1;
+    z-index: 10;
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+#soz {
+    font-size: 100px;
+}
+
+#tabs li {
+    height: 100%;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    font-size: 6vw;
+    border-radius: 15px 15px 0px 0px;
+}
+
+@media screen and (min-width: 600px) {
+    #tabs li {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    *:not(#srnz) {}
+    #srnz {
+        display: block;
+    }
+}
+
+#tabs li span {
+    padding: 20px;
 }

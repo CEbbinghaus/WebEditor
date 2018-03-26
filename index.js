@@ -1,78 +1,27 @@
-let current = "css";
-let logs = [];
-let log = console.log;
-const byId = i => document.getElementById(i);
-console.log = function(){
-    logs.push(arguments);
-    let args = [];
-    for(argIndex = 0; argIndex < arguments.length; argIndex++){
-        args.push(arguments[argIndex])
-    }
-    if(byId("exec").classList.contains("cs"))byId("edit").value += args.join(", ") + "\n";
-    log.apply(console, arguments);
-}
-window.addEventListener("keydown", (e) => {
-    if(e.keyCode == 9){
-        event.preventDefault();
-    }
-})
-window.addEventListener('storage', function (e) {
-    byId("edit").value = e.storageArea[current];
-    update(e.storageArea[current]);
-    ["html", "js", "css"].forEach(e => {
-        update(e.storageArea[e]);
-    })
-})
-const changeEdit = i => {
-    document.getElementsByClassName("cs")[0].classList.remove("cs")
-    byId(i).parentElement.classList.add("cs")
-    byId("edit").classList = byId(i).parentElement.classList.toString().replace("h", "")
-    if(i == "Out"){
-        byId("edit").disabled = true;
+let currentEdit = "css";
+const BowserStorage = new storage(localStorage);
+const switchEditor = e => {
+    currentEdit = e.id.toLowerCase();
+    document.getElementsByClassName("cs")[0].classList.remove("cs");
+    byId("editor").classList = e.parentElement.classList.toString().replace("h", "");
+    e.parentElement.classList.add("cs")
+    if(currentEdit == "out"){
+        byId("TxtA").style.display = "none"
     }else{
-        byId("edit").disabled = false;
-        current = i.toLowerCase();
-        let j = document.getElementsByClassName("exec");
-        for(s = 0; s < j.length; s++){
-            current == "js" ? j[s].classList.remove("exh") : j[s].classList.add("exh");
-        }
-        load();
+        byId("TxtA").style.display = "inline"
+        byId("TxtA").innerHTML = BowserStorage.data.current[currentEdit];
+        currentEdit == "js" ? byId("exec").classList.remove("exh") : byId("exec").classList.add("exh");
     }
 }
-const update = c => {
-    byId(current).innerHTML = c;
-    byId("edit").value = c;
-    save();
-}
-const reset = () => {
-    ["html", "js", "css"].forEach(e => {
-        localStorage.removeItem(e);
-        location.reload();
-    })
+const update = v => {
+    byId(currentEdit).innerHTML = v;
+    BowserStorage.data.current[currentEdit] = v;
+    BowserStorage.save()
 }
 const save = () => {
-    localStorage.setItem(current, byId("edit").value);
+    let name = BowserStorage.data.current.name ? BowserStorage.data.current.name : prompt("Please Enter A Name for the current Project");
+    if(name){
+        BowserStorage.data.current.name = name;
+        BowserStorage.data.saved[name] = {id: generateId(), css: BowserStorage.data.current.css, html: BowserStorage.data.current.html, js: BowserStorage.data.current.js}
+    }else alert("you must enter a name");
 }
-const load = () => {
-    if(localStorage.getItem(current) == undefined){
-        localStorage.setItem(current, byId(current).innerHTML)
-    }
-    byId("edit").value = localStorage.getItem(current);
-}
-if (localStorage.getItem(current)) {
-    byId("edit").value = localStorage.getItem(current);
-    update(byId("edit").value)
-};
-const run = () => {
-    byId("edit").value = "";
-    logs = [];
-    try{
-        eval(localStorage.getItem("js"))
-    }catch(err){
-        byId("edit").value = err.toString();
-    }
-}
-["html", "js", "css"].forEach(e => {
-    current = e;
-    update(localStorage.getItem(current) == undefined ?  byId(e).innerHTML.trim():localStorage.getItem(current))
-})
