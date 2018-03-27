@@ -13,9 +13,12 @@ class storage{
         }
     }
     async init(){
-        let r = await fetch("https://api.myjson.com/bins/nn7nz");
+        let r = await fetch("https://api.myjson.com/bins/ttuhb");
         let j = await r.json();
         this.data = j;
+        this.types.forEach(v => {update(this.data.current[v], v)})
+        switchEditor(document.getElementById("css"))
+        //update(this.data.current[currentEdit])
         return j;
     }
     loadData(){
@@ -25,6 +28,7 @@ class storage{
     }
     loadCfg(t = true){
         t && this.loadData();
+        if(!this.data.current || !this.data.saved)return this.init();
         if(!this.data.current.keyLength()){
             this.data.current = this.data.history[0] || {};
         }
@@ -54,8 +58,6 @@ class storage{
             this.data.current.js = d[1];
             this.data.current.css = d[2];
         }catch(err){
-            console.log()
-            console.error(err.stack)
             alert("Whoops Something Went Wrong. soz")
         }
         this.loadCfg(false);

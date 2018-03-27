@@ -8,10 +8,10 @@ const randChar = (n = 26, sn) => {
     let t = sn ? a.slice(n, sn) : a.slice(0, n);
     return t.split("").splice(Math.random() * t.length | 0)[0];
 }
-Object.prototype.forEach = function(c){
+Object.prototype.forEach = function(c, r){
     let k = Object.keys(this);
     k.forEach((kn, i) => {
-        c(this[kn], kn, i)
+        this [kn] = c(this[kn], kn, i)
     })
 }
 Object.prototype.keys = function(){

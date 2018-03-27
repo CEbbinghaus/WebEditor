@@ -13,10 +13,12 @@ const switchEditor = e => {
         currentEdit == "js" ? byId("exec").classList.remove("exh") : byId("exec").classList.add("exh");
     }
 }
-const update = v => {
+const load = () => {
+    byId("TxtA").innerHTML = BowserStorage.data.current[currentEdit];
+}
+const update = (v, n) => {
     byId(currentEdit).innerHTML = v;
-    BowserStorage.data.current[currentEdit] = v;
-    BowserStorage.save()
+    BowserStorage.data.current[n ? n : currentEdit] = v;
 }
 const save = () => {
     let name = BowserStorage.data.current.name ? BowserStorage.data.current.name : prompt("Please Enter A Name for the current Project");

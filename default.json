@@ -1,6 +1,8 @@
 {
     "current": {
-
+        "css" : "body{\n    color: #ffd8d8\n}",
+        "js" : "console.log(\"test\")",
+        "html" : "<h1>This is a little Sandbox for Web Development. Original CSS can be found <a href=\"./basecss.css\">here</a></h1>"
     },
     "saved" : {
 
