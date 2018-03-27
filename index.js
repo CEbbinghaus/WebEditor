@@ -9,12 +9,12 @@ const switchEditor = e => {
         byId("TxtA").style.display = "none"
     }else{
         byId("TxtA").style.display = "inline"
-        byId("TxtA").innerHTML = BowserStorage.data.current[currentEdit];
+        byId("TxtA").value = BowserStorage.data.current[currentEdit];
         currentEdit == "js" ? byId("exec").classList.remove("exh") : byId("exec").classList.add("exh");
     }
 }
 const load = () => {
-    byId("TxtA").innerHTML = BowserStorage.data.current[currentEdit];
+    byId("TxtA").value = BowserStorage.data.current[currentEdit];
 }
 const update = (v, n) => {
     byId(currentEdit).innerHTML = v;
