@@ -13,7 +13,7 @@ body {
 
 #editor {
     width: 100vw;
-    height: 70vh;
+    height: 80vh;
     padding: 0px;
 }
 
@@ -26,7 +26,7 @@ body {
     background: #00000000;
     position: relative;
     top: 0px;
-    padding: 20px 20px 0px;
+    padding: 0px 20px;
 }
 
 #TxtA:focus {
@@ -210,4 +210,8 @@ header {
 
 #tabs li span {
     padding: 20px;
+}
+
+#log{
+    display: none;
 }

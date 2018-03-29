@@ -1,5 +1,5 @@
 let currentEdit = "css";
-const BowserStorage = new storage(localStorage);
+const BowserStorage = new Storage(localStorage);
 const switchEditor = e => {
     currentEdit = e.id.toLowerCase();
     document.getElementsByClassName("cs")[0].classList.remove("cs");
@@ -7,6 +7,7 @@ const switchEditor = e => {
     e.parentElement.classList.add("cs")
     if(currentEdit == "out"){
         byId("TxtA").style.display = "none"
+        byId("log").style.display = "block"
     }else{
         byId("TxtA").style.display = "inline"
         byId("TxtA").value = BowserStorage.data.current[currentEdit];
@@ -27,4 +28,13 @@ const save = () => {
         BowserStorage.data.saved[name] = {id: generateId(), css: BowserStorage.data.current.css, html: BowserStorage.data.current.html, js: BowserStorage.data.current.js}
     }else alert("you must enter a name");
     alert("Saved as " + name)
+}
+const run = () => {
+    let code = BowserStorage.data.current.js;
+    try{
+        let r = eval(code);
+        console.log(r);
+    }catch(err){
+        console.log(err.toString());
+    }
 }

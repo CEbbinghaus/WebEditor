@@ -1,4 +1,4 @@
-class storage{
+class Storage{
     constructor(s){
         this.types = ["css", "js", "html"]
         this.storageLocker = s;
