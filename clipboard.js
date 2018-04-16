@@ -19,3 +19,14 @@ function Clipboard(){
 		return true;
 	}.bind(this);
 }
+
+const copy = t => {
+	if(!window.copyTextarea){
+		window.copyTextarea = document.createElement("textarea");
+		copyTextarea.style = "position: fixed; width: 0px; height: 0px; visibility: hidden; left: -20vw;";
+		document.body.appendChild(copyTextarea)
+	}
+	copyTextarea.innerText = t;
+	copyTextarea.select();
+	return document.execCommand("copy");
+}

@@ -61,19 +61,18 @@ class Storage{
 
         }
     }
-    loadURL(url){
+    loadURL(str){
         this.loadData();
         this.backup()
         try{
-            let d = (url ? url : getUrlParam("data")).split("|").map(v => atob(v));
-            this.data.current.html = d[0];
-            this.data.current.js = d[1];
-            this.data.current.css = d[2];
-            this.loadCfg(false);
+            let d = (str ? str : getUrlParam("data"));
+            let decodedObj = JSON.parse(atob(d));
+            this.data.current = decodedObj;
         }catch(err){
             console.error(err)
             alert("Whoops Something Went Wrong. soz")
         }
+        this.loadCfg();
     }
     restoreFromCurrent(){
         
